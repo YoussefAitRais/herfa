@@ -7,11 +7,12 @@ import jakarta.persistence.OneToOne;
 public class Client extends User{
 
 
-    @OneToMany
-    private Devis devis;
 
 
     private String phoneNumber;
+
+    @ManyToOne
+    private Devis devis;
 
     public Client(String phoneNumber, String password, String email, String name, Long id) {
         super(password, email, name, id);

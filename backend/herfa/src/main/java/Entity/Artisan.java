@@ -1,5 +1,6 @@
 package Entity;
 
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 public class Artisan extends User {
@@ -10,7 +11,7 @@ public class Artisan extends User {
     private String description;
 
 
-    @OneToMany
+    @ManyToOne
     private Devis devis;
 
     public Artisan(String job, String location, String description, String password, String email, String name, Long id) {
