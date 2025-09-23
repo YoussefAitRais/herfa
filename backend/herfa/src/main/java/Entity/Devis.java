@@ -1,5 +1,6 @@
 package Entity;
 
+import ch.qos.logback.core.status.Status;
 import jakarta.persistence.OneToMany;
 
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ public class Devis {
     private Long id;
     private BigDecimal amount;
     private LocalDateTime dateDevis;
+    private Status status;
 
 
     @OneToMany
@@ -50,5 +52,13 @@ public class Devis {
 
     public void setDateDevis(LocalDateTime dateDevis) {
         this.dateDevis = dateDevis;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
