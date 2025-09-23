@@ -1,11 +1,13 @@
 package Entity;
 
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 public class Client extends User{
 
 
-    @ManyToOne
+    @OneToMany
     private Devis devis;
 
 

@@ -1,6 +1,8 @@
 package Entity;
 
 import ch.qos.logback.core.status.Status;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 import java.math.BigDecimal;
@@ -15,11 +17,15 @@ public class Devis {
     private Status status;
 
 
-    @OneToMany
+    @ManyToOne
     private Client client;
 
-    @OneToMany
+    @ManyToOne
     private Artisan artisan;
+
+    @Enumerated
+    private Status devisStatus;
+
 
     public Devis(Long id, BigDecimal amount, LocalDateTime dateDevis) {
         this.id = id;

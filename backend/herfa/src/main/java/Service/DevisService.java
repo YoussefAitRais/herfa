@@ -18,6 +18,8 @@ public class DevisService {
     }
 
 
+    //CRUD basiques
+
     public Devis createDevis(Devis devis){
         return devisRepository.save(devis);
     }
@@ -53,6 +55,7 @@ public class DevisService {
     }
 
 
+    //Operations spécifiques
 
     public Devis sendDevis(Devis devis) {
         return devisRepository.save(devis);
@@ -63,7 +66,7 @@ public class DevisService {
     }
 
     public List<Devis> listDevisByArtisan(Long artisanId) {
-        return (List<Devis>) devisRepository.findByClient_Id(artisanId);
+        return (List<Devis>) devisRepository.findByArtisan_Id(artisanId);
     }
 
     public Devis updateStatusDevis(Devis devis) {
