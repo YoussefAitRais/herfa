@@ -1,0 +1,69 @@
+package Controller;
+
+import DTO.requestDTO.DevisRequestDTO;
+import Service.DevisService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@Controller
+@RequestMapping("/devis")
+public class DevisController {
+
+
+    private final DevisService devisService;
+
+    public DevisController(DevisService devisService) {
+        this.devisService = devisService;
+    }
+
+    @PostMapping
+    public ResponseEntity<?> createDevis (@Valid @RequestBody DevisRequestDTO devisRequestDTO) {
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+
+    @GetMapping
+    public ResponseEntity<?> getAllDevis() {
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getDevisById(@PathVariable Long id) {
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateDevis(@PathVariable Long id, @Valid @RequestBody DevisRequestDTO devisRequestDTO) {
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteDevisById(@PathVariable Long id) {
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/all")
+    public ResponseEntity<?> deleteAllDevis() {
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    //Operations spécifiques
+
+    @PostMapping("/send")
+    public ResponseEntity<?> sendDevis(@Valid @RequestBody DevisRequestDTO devisRequestDTO) {
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+
+
+
+
+
+
+
+
+}
