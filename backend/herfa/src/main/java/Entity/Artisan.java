@@ -23,8 +23,6 @@ public class Artisan extends User {
 
     public Artisan() {
         super();
-
-
     }
 
     public String getJob() {
