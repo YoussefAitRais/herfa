@@ -24,7 +24,6 @@ public class CustomExceptionHandler {
                     String errorMessage = error.getDefaultMessage();
             errors.put(errorMessage, fieldName);
         });
-        return new  ResponseEntity<>(errors,HttpStatus.BAD_REQUEST);
-
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
