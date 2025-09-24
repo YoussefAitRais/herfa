@@ -1,6 +1,7 @@
 package Controller;
 
 import DTO.requestDTO.DevisRequestDTO;
+import Entity.DevisSatus;
 import Service.DevisService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -56,6 +57,25 @@ public class DevisController {
     @PostMapping("/send")
     public ResponseEntity<?> sendDevis(@Valid @RequestBody DevisRequestDTO devisRequestDTO) {
         return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @GetMapping("Client/{clientId}")
+    public ResponseEntity<?> listDevisByClient(@PathVariable Long clientId) {
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @GetMapping("Artisan/{artisanId}")
+    public ResponseEntity<?> listDevisByArtisan(@PathVariable Long artisanId) {
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> updateDevisStatus(@PathVariable Long id, @RequestParam String status) {
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    public static class updateDevisStatusRequest {
+        public DevisSatus satus;
     }
 
 
