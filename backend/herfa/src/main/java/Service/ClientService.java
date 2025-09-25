@@ -3,6 +3,8 @@ package Service;
 import Entity.Client;
 import Repository.ClientRepository;
 import Repository.DevisRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,41 +21,44 @@ public class ClientService {
         this.devisRepository = devisRepository;
     }
 
-    public Client createClient(String name, String email, String password, String phoneNumber) {
-        Client client = new Client(phoneNumber, password, email, name, null);
-        return clientRepository.save(client);
+    public ResponseEntity<Client> createClient(Client client) {
+        Client saved = clientRepository.save(client);
+        return new ResponseEntity<>(saved , HttpStatus.CREATED);
     }
 
-    public Client getClient(String phoneNumber) {
-        return clientRepository.findAll().stream()
-                .filter(client -> client.getPhoneNumber().equals(phoneNumber))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Client not found"));
+
+
+    public ResponseEntity<Client> getClientById(Long id) {
+        Client clients = clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client not found"));
+        return new ResponseEntity<>(clients, HttpStatus.OK);
+
     }
 
-    public Client getClientById(Long id) {
-        return clientRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Client not found"));
+
+    public ResponseEntity<List<Client>> getAllClients() {
+        List<Client> clients = clientRepository.findAll();
+        return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 
-    public List<Client> getAllClients() {
-        return clientRepository.findAll();
-    }
-
-    public Client updateClient(Long id, String name, String email, String password, String phoneNumber) {
+    public Client updateClient(Long id, Client client) {
         Client existingClient = clientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Client not found"));
-        existingClient.setName(name);
-        existingClient.setEmail(email);
-        existingClient.setPassword(password);
-        existingClient.setPhoneNumber(phoneNumber);
-        return clientRepository.save(existingClient);
+
+        existingClient.setName(client.getName());
+        existingClient.setEmail(client.getEmail());
+        existingClient.setPassword(client.getPassword());
+        existingClient.setPhoneNumber(client.getPhoneNumber());
+
+        Client saved = clientRepository.save(existingClient);
+
+        return new ResponseEntity<>(saved, HttpStatus.OK).getBody();
     }
 
-    public void deleteClient(Long id) {
+    public ResponseEntity<Void> deleteClient(Long id) {
         if (!clientRepository.existsById(id)) {
             throw new RuntimeException("Client not found");
         }
         clientRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
