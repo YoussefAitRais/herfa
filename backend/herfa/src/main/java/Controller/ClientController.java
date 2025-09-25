@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Controller
 public class ClientController {
@@ -19,34 +21,35 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createClient(@RequestBody Client client) {
-        return new ResponseEntity<>("", HttpStatus.CREATED);
-
+    public ResponseEntity<Client> createClient(@RequestBody Client client) {
+        return clientService.createClient(client);
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllClients() {
-        return new ResponseEntity<>("", HttpStatus.OK);
+    public ResponseEntity<List<Client>> getAllClients() {
+        return clientService.getAllClients();
     }
 
     @GetMapping
-    public ResponseEntity<?> getClientById(@RequestParam int id) {
-        return new ResponseEntity<>("", HttpStatus.OK);
+    public ResponseEntity<Client> getClientById(@PathVariable Long id) {
+        return clientService.getClientById(id);
     }
 
     @PutMapping
-    public ResponseEntity<?> updateClient(@RequestBody Client client) {
-        return new ResponseEntity<>("", HttpStatus.OK);
+    public ResponseEntity<Client> updateClient(@RequestBody Long id, @RequestBody Client client) {
+        Client updatedClient = clientService.updateClient(id, client);
+        return ResponseEntity.ok(updatedClient);
     }
 
     @DeleteMapping
-    public ResponseEntity<?> deleteClientById(@RequestParam int id) {
-        return new ResponseEntity<>("", HttpStatus.OK);
+    public ResponseEntity<Void> deleteClientById(@PathVariable Long id) {
+        return clientService.deleteClient(id);
     }
 
     @DeleteMapping
-    public ResponseEntity<?> deleteAllClients() {
-        return new ResponseEntity<>("", HttpStatus.OK);
+    public ResponseEntity<Void> deleteAllClients() {
+        clientService.getAllClients();
+        return ResponseEntity.noContent().build();
     }
 
 

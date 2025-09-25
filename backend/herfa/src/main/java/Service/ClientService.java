@@ -21,7 +21,7 @@ public class ClientService {
         this.devisRepository = devisRepository;
     }
 
-    public ResponseEntity<Client> createClient(Client client) {
+    public static ResponseEntity<Client> createClient(Client client) {
         Client saved = clientRepository.save(client);
         return new ResponseEntity<>(saved , HttpStatus.CREATED);
     }
