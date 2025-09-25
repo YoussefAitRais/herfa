@@ -3,10 +3,8 @@ package Entity;
 import ch.qos.logback.core.status.Status;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Devis {
@@ -64,7 +62,7 @@ public class Devis {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(DevisSatus status) {
         this.status = status;
     }
 }
