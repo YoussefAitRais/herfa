@@ -30,7 +30,7 @@ public class DevisController {
     }
 
 
-    @GetMapping
+    @GetMapping("/allDevis")
     public ResponseEntity<List<Devis>> getAllDevis() {
         return devisService.getAllDevis();
     }

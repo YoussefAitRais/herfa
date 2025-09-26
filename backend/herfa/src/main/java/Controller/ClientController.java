@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @Controller
+@RequestMapping("/client")
 public class ClientController {
 
     private final ClientService clientService;
@@ -20,34 +21,34 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Client> createClient(@RequestBody Client client) {
         Client savedClient = clientService.createClient(client).getBody();
         return new ResponseEntity<>(savedClient, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/allClient")
     public ResponseEntity<List<Client>> getAllClients() {
         return clientService.getAllClients();
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<Client> getClientById(@PathVariable Long id) {
         return clientService.getClientById(id);
     }
 
-    @PutMapping
+    @PutMapping("/{id}/update")
     public ResponseEntity<Client> updateClient(@RequestBody Long id, @RequestBody Client client) {
         Client updatedClient = clientService.updateClient(id, client);
         return ResponseEntity.ok(updatedClient);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}/delete")
     public ResponseEntity<Void> deleteClientById(@PathVariable Long id) {
         return clientService.deleteClient(id);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleteAllClient")
     public ResponseEntity<Void> deleteAllClients() {
         clientService.getAllClients();
         return ResponseEntity.noContent().build();

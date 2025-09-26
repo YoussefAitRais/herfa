@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @Controller
-@RequestMapping("/api/artisans")
+@RequestMapping("/artisans")
 public class ArtisanController {
 
 
@@ -21,13 +21,13 @@ public class ArtisanController {
         this.artisansService = artisansService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Artisan> createArtisan(@RequestBody Artisan artisan) {
         Artisan savedArtisan = artisansService.createArtisan(artisan);
         return new ResponseEntity<>(savedArtisan, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/allArtisan")
     public ResponseEntity<List<Artisan>> getAllArtisan() {
         return ResponseEntity.ok(artisansService.findAll());
     }
@@ -59,7 +59,7 @@ public class ArtisanController {
         return artisansService.deleteArtisan(id);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}/deleteAllArtisan")
     public ResponseEntity<Artisan> deleteAllArtisan() {
         artisansService.findAll().forEach(artisan -> artisansService.deleteArtisan(artisan.getId()));
         return ResponseEntity.noContent().build();
