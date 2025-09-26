@@ -3,6 +3,8 @@ package Service;
 import Entity.Artisan;
 import Repository.ArtisanRepository;
 import Repository.DevisRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +32,7 @@ public class ArtisanService {
         return artisanRepository.findAll();
     }
 
+
     public Artisan findById(Long id) {
         return artisanRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Client not found"));
@@ -47,8 +50,12 @@ public class ArtisanService {
         return artisanRepository.save(existingArtisan);
     }
 
-    public void delete(Long id) {
+    public ResponseEntity<Void> deleteArtisan(Long id) {
+        if (!artisanRepository.existsById(id)) {
+            throw new RuntimeException("Artisan not found");
+        }
         artisanRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     public void deletById(Long id) {

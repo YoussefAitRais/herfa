@@ -21,15 +21,14 @@ public class ClientService {
         this.devisRepository = devisRepository;
     }
 
-    public static ResponseEntity<Client> createClient(Client client) {
+    public ResponseEntity<Client> createClient(Client client) {
         Client saved = clientRepository.save(client);
         return new ResponseEntity<>(saved , HttpStatus.CREATED);
     }
 
-
-
     public ResponseEntity<Client> getClientById(Long id) {
-        Client clients = clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client not found"));
+        Client clients = clientRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Client not found"));
         return new ResponseEntity<>(clients, HttpStatus.OK);
 
     }

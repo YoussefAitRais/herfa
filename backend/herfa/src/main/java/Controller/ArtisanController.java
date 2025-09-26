@@ -7,27 +7,61 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Controller
+@RequestMapping("/api/artisans")
 public class ArtisanController {
 
-    private final ArtisanService artisanService;
-    public ArtisanController(ArtisanService artisanService) {
-        this.artisanService = artisanService;
+
+    private final ArtisanService artisansService;
+
+    public ArtisanController(ArtisanService artisanService, ArtisanService artisansService) {
+        this.artisansService = artisansService;
     }
 
     @PostMapping
-    public ResponseEntity<?> createArtisan(@RequestBody Artisan artisan) {
-        return new ResponseEntity<>("",HttpStatus.OK);
+    public ResponseEntity<Artisan> createArtisan(@RequestBody Artisan artisan) {
+        Artisan savedArtisan = artisansService.createArtisan(artisan);
+        return new ResponseEntity<>(savedArtisan, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllArtisan() {
-        return new ResponseEntity<>("", HttpStatus.OK);
+    public ResponseEntity<List<Artisan>> getAllArtisan() {
+        return ResponseEntity.ok(artisansService.findAll());
     }
 
-    @GetMapping
-    public ResponseEntity<?> getArtisanById(@RequestParam int id) {
-        return new ResponseEntity<>("",HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<Artisan> getArtisanById(@PathVariable Long id) {
+        Artisan artisan = artisansService.findById(id);
+        return ResponseEntity.ok(artisan);
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Artisan> updateArtisan(@RequestBody Artisan artisan , @PathVariable Long id) {
+        Artisan updates = artisansService.findById(id);
+        updates.setName(artisan.getName());
+        updates.setEmail(artisan.getEmail());
+        updates.setPassword(artisan.getPassword());
+        updates.setLocation(artisan.getLocation());
+        updates.setJob(artisan.getJob());
+        updates.setDescription(artisan.getDescription());
+
+        Artisan saved = artisansService.save(updates);
+        return ResponseEntity.ok(saved);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteArtisanById(@PathVariable Long id) {
+        return artisansService.deleteArtisan(id);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Artisan> deleteAllArtisan() {
+        artisansService.findAll().forEach(artisan -> artisansService.deleteArtisan(artisan.getId()));
+        return ResponseEntity.noContent().build();
     }
 }
