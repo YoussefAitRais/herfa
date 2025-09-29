@@ -24,7 +24,7 @@ public class DevisController {
         this.devisService = devisService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Devis> createDevis (@Valid @RequestBody Devis devis) {
         return devisService.createDevis(devis);
     }

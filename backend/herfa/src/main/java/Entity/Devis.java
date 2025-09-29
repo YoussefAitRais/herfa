@@ -12,7 +12,7 @@ public class Devis {
     private Long id;
     private BigDecimal amount;
     private LocalDateTime dateDevis;
-    private Status status;
+    private DevisSatus status;
 
 
     @ManyToOne
@@ -58,7 +58,7 @@ public class Devis {
         this.dateDevis = dateDevis;
     }
 
-    public Status getStatus() {
+    public DevisSatus getStatus() {
         return status;
     }
 
