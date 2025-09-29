@@ -1,22 +1,24 @@
-package Entity;
+package org.event.herfa.Entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
-public class User {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class User {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
 
-
+    @Column(name = "name", nullable = false)
     protected String name;
+
+    @Column(name = "email", unique = true)
     protected String email;
+
+    @Column(name = "password")
     protected String password;
 
     public User(String password, String email, String name, Long id) {

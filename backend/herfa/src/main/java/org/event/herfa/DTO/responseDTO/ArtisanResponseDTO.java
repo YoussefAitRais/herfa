@@ -1,4 +1,4 @@
-package DTO.responseDTO;
+package org.event.herfa.DTO.responseDTO;
 
 
 

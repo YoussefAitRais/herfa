@@ -1,28 +1,30 @@
-package Entity;
+package org.event.herfa.Entity;
 
-import ch.qos.logback.core.status.Status;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Entity
+@Table (name = "Devis")
 public class Devis {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private BigDecimal amount;
     private LocalDateTime dateDevis;
-    private DevisSatus status;
 
+
+    @Enumerated(EnumType.STRING)
+    private DevisSatus status;
 
     @ManyToOne
     private Client client;
 
     @ManyToOne
     private Artisan artisan;
-
-    @Enumerated
-    private Status devisStatus;
 
 
     public Devis(Long id, BigDecimal amount, LocalDateTime dateDevis) {
@@ -65,4 +67,6 @@ public class Devis {
     public void setStatus(DevisSatus status) {
         this.status = status;
     }
+
+
 }

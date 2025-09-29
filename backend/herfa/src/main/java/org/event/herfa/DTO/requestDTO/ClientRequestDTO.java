@@ -1,4 +1,4 @@
-package DTO.requestDTO;
+package org.event.herfa.DTO.requestDTO;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

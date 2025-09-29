@@ -1,4 +1,4 @@
-package exception;
+package org.event.herfa.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

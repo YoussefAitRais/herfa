@@ -1,7 +1,7 @@
-package Controller;
+package org.event.herfa.Controller;
 
-import Entity.Artisan;
-import Service.ArtisanService;
+import org.event.herfa.Entity.Artisan;
+import org.event.herfa.Service.ArtisanService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ public class ArtisanController {
 
     private final ArtisanService artisansService;
 
-    public ArtisanController(ArtisanService artisanService, ArtisanService artisansService) {
+    public ArtisanController( ArtisanService artisansService) {
         this.artisansService = artisansService;
     }
 

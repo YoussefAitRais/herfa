@@ -1,6 +1,6 @@
-package DTO.responseDTO;
+package org.event.herfa.DTO.responseDTO;
 
-import Entity.DevisSatus;
+import org.event.herfa.Entity.DevisSatus;
 
 import java.time.LocalDate;
 

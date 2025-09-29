@@ -1,18 +1,21 @@
-package Entity;
+package org.event.herfa.Entity;
 
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
+import java.util.List;
+
+
+@Entity
+@Table (name = "Clients")
 public class Client extends User{
-
-
-
 
     private String phoneNumber;
 
-    @ManyToOne
-    private Devis devis;
+    @OneToMany(mappedBy = "client")
+    private List<Devis> devisList;
+
 
     public Client(String phoneNumber, String password, String email, String name, Long id) {
         super(password, email, name, id);

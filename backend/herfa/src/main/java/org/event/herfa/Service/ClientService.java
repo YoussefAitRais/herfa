@@ -1,15 +1,15 @@
-package Service;
+package org.event.herfa.Service;
 
-import Entity.Client;
-import Repository.ClientRepository;
-import Repository.DevisRepository;
+import org.event.herfa.Entity.Client;
+import org.event.herfa.Repository.ClientRepository;
+import org.event.herfa.Repository.DevisRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+@Service
 public class ClientService {
 
     private ClientRepository clientRepository;

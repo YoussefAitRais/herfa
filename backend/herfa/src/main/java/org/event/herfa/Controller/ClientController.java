@@ -1,8 +1,8 @@
-package Controller;
+package org.event.herfa.Controller;
 
 
-import Entity.Client;
-import Service.ClientService;
+import org.event.herfa.Entity.Client;
+import org.event.herfa.Service.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

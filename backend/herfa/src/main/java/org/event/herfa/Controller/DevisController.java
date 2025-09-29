@@ -1,20 +1,16 @@
-package Controller;
+package org.event.herfa.Controller;
 
-import DTO.requestDTO.DevisRequestDTO;
-import Entity.Devis;
-import Entity.DevisSatus;
-import Service.DevisService;
+import org.event.herfa.Entity.Devis;
+import org.event.herfa.Entity.DevisSatus;
+import org.event.herfa.Service.DevisService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@Controller
-@RequestMapping("/devis")
+@RequestMapping("/api/devis")
 public class DevisController {
 
 
@@ -25,7 +21,7 @@ public class DevisController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Devis> createDevis (@Valid @RequestBody Devis devis) {
+    public ResponseEntity<Devis> createDevis (@RequestBody Devis devis) {
         return devisService.createDevis(devis);
     }
 
@@ -62,12 +58,12 @@ public class DevisController {
         return devisService.sendDevis(devis);
     }
 
-    @GetMapping("Client/{clientId}")
+    @GetMapping("/Client/{clientId}")
     public ResponseEntity<List<Devis>> listDevisByClient(@PathVariable Long clientId) {
         return devisService.listDevisByClient(clientId);
     }
 
-    @GetMapping("Artisan/{artisanId}")
+    @GetMapping("/Artisan/{artisanId}")
     public ResponseEntity<List<Devis>> listDevisByArtisan(@PathVariable Long artisanId) {
         return devisService.listDevisByArtisan(artisanId);
     }

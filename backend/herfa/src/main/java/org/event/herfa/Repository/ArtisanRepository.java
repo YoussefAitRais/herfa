@@ -1,9 +1,9 @@
-package Repository;
+package org.event.herfa.Repository;
 
-import Entity.Artisan;
+import org.event.herfa.Entity.Artisan;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ArtisanRepository extends JpaRepository<Artisan, Long> {
 
-    Artisan findByArtisanId(Long artisanId);
+    Artisan findById(long id);
 }

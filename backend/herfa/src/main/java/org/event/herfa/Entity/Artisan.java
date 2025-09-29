@@ -1,8 +1,14 @@
-package Entity;
+package org.event.herfa.Entity;
 
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
+import java.util.List;
+
+
+@Entity
+@Table(name = "Artisans")
 public class Artisan extends User {
 
 
@@ -11,8 +17,8 @@ public class Artisan extends User {
     private String description;
 
 
-    @ManyToOne
-    private Devis devis;
+    @OneToMany(mappedBy = "artisan")
+    private List<Devis> devisList;
 
     public Artisan(String job, String location, String description, String password, String email, String name, Long id) {
         super(password, email, name, id);

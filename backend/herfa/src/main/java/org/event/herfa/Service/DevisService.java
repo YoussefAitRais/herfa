@@ -1,9 +1,9 @@
-package Service;
+package org.event.herfa.Service;
 
 
-import Entity.Devis;
-import Entity.DevisSatus;
-import Repository.DevisRepository;
+import org.event.herfa.Entity.Devis;
+import org.event.herfa.Entity.DevisSatus;
+import org.event.herfa.Repository.DevisRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
