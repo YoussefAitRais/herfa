@@ -1,4 +1,4 @@
-package org.event.herfa.DTO.responseDTO;
+package org.event.herfa.dto.responseDTO;
 
 
 public record ClientResponseDTO(

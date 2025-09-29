@@ -1,8 +1,8 @@
-package org.event.herfa.Controller;
+package org.event.herfa.controller;
 
-import org.event.herfa.Entity.Devis;
-import org.event.herfa.Entity.DevisSatus;
-import org.event.herfa.Service.DevisService;
+import org.event.herfa.entity.Devis;
+import org.event.herfa.entity.DevisSatus;
+import org.event.herfa.service.DevisService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

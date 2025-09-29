@@ -1,6 +1,6 @@
-package org.event.herfa.Repository;
+package org.event.herfa.repository;
 
-import org.event.herfa.Entity.Devis;
+import org.event.herfa.entity.Devis;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

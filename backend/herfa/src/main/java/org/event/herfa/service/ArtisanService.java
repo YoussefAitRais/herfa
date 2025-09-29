@@ -1,8 +1,8 @@
-package org.event.herfa.Service;
+package org.event.herfa.service;
 
-import org.event.herfa.Entity.Artisan;
-import org.event.herfa.Repository.ArtisanRepository;
-import org.event.herfa.Repository.DevisRepository;
+import org.event.herfa.entity.Artisan;
+import org.event.herfa.repository.ArtisanRepository;
+import org.event.herfa.repository.DevisRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

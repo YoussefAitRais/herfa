@@ -1,4 +1,4 @@
-package org.event.herfa.Entity;
+package org.event.herfa.entity;
 
 public enum Role {
     ARTISAN,

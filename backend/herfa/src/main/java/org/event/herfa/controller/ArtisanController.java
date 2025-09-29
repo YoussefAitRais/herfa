@@ -1,7 +1,7 @@
-package org.event.herfa.Controller;
+package org.event.herfa.controller;
 
-import org.event.herfa.Entity.Artisan;
-import org.event.herfa.Service.ArtisanService;
+import org.event.herfa.entity.Artisan;
+import org.event.herfa.service.ArtisanService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

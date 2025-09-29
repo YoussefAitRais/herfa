@@ -1,6 +1,6 @@
-package org.event.herfa.Repository;
+package org.event.herfa.repository;
 
-import org.event.herfa.Entity.Client;
+import org.event.herfa.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

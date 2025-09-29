@@ -1,6 +1,6 @@
-package org.event.herfa.DTO.requestDTO;
+package org.event.herfa.dto.requestDTO;
 
-import org.event.herfa.Entity.DevisSatus;
+import org.event.herfa.entity.DevisSatus;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
