@@ -1,0 +1,44 @@
+<div class="md:hidden bg-blue-600 p-4 text-white flex justify-between items-center">
+  <span class="font-bold">Menu</span>
+  <button (click)="toggleSidebar()" class="focus:outline-none">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7" />
+    </svg>
+  </button>
+</div>
+
+<!-- Sidebar -->
+<div
+  class="fixed inset-y-0 left-0 z-30 w-64 bg-gray-800 text-white p-4 transform md:translate-x-0 transition-transform duration-200 ease-in-out"
+  [ngClass]="{ '-translate-x-full': !isOpen, 'translate-x-0': isOpen }"
+>
+  <ul class="space-y-4">
+    <li>
+      <a routerLink="/dashboard/artisans" routerLinkActive="text-yellow-400" class="block hover:text-yellow-300">
+        Artisans
+      </a>
+    </li>
+    <li>
+      <a routerLink="/dashboard/clients" routerLinkActive="text-yellow-400" class="block hover:text-yellow-300">
+        Clients
+      </a>
+    </li>
+    <li>
+      <a routerLink="/dashboard/devis" routerLinkActive="text-yellow-400" class="block hover:text-yellow-300">
+        Devis
+      </a>
+    </li>
+    <li>
+      <a routerLink="/dashboard/profile" routerLinkActive="text-yellow-400" class="block hover:text-yellow-300">
+        Profile
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div
+  *ngIf="isOpen"
+  (click)="toggleSidebar()"
+  class="fixed inset-0 bg-black opacity-50 z-20 md:hidden">
+</div>
