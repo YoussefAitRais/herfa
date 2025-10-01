@@ -1,0 +1,76 @@
+<div class="min-h-screen flex flex-col bg-gray-100">
+  <!-- ✅ Navbar -->
+  <header class="bg-teal-600 text-white shadow-md">
+    <div class="flex justify-between items-center px-6 py-4">
+      <h1 class="text-xl font-bold">Artisan Dashboard</h1>
+      <nav class="flex space-x-4">
+        <a href="#" class="hover:underline">Profile</a>
+        <a href="#" class="hover:underline">Settings</a>
+        <button class="bg-red-500 px-3 py-1 rounded hover:bg-red-600">Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="flex flex-1">
+    <!-- ✅ Sidebar -->
+    <aside class="w-64 bg-white shadow-lg hidden md:block">
+      <ul class="p-4 space-y-4">
+        <li><a href="#" class="block py-2 px-3 rounded hover:bg-teal-100">Dashboard</a></li>
+        <li><a href="#" class="block py-2 px-3 rounded hover:bg-teal-100">My Services</a></li>
+        <li><a href="#" class="block py-2 px-3 rounded hover:bg-teal-100">Devis Received</a></li>
+        <li><a href="#" class="block py-2 px-3 rounded hover:bg-teal-100">Clients</a></li>
+      </ul>
+    </aside>
+
+    <!-- ✅ Main Content -->
+    <main class="flex-1 p-6">
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div class="bg-white shadow rounded-lg p-4">
+          <h3 class="text-gray-500">Total Devis</h3>
+          <p class="text-2xl font-bold">58</p>
+        </div>
+        <div class="bg-white shadow rounded-lg p-4">
+          <h3 class="text-gray-500">Accepted Devis</h3>
+          <p class="text-2xl font-bold">34</p>
+        </div>
+        <div class="bg-white shadow rounded-lg p-4">
+          <h3 class="text-gray-500">Pending Devis</h3>
+          <p class="text-2xl font-bold">24</p>
+        </div>
+      </div>
+
+      <!-- ✅ Table -->
+      <div class="bg-white shadow rounded-lg p-6">
+        <div class="flex justify-between mb-4">
+          <h2 class="text-lg font-bold">My Devis</h2>
+          <button class="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700">+ Add Service</button>
+        </div>
+        <table class="w-full table-auto">
+          <thead class="bg-gray-100">
+          <tr>
+            <th class="text-left px-4 py-2">ID</th>
+            <th class="text-left px-4 py-2">Client</th>
+            <th class="text-left px-4 py-2">Amount</th>
+            <th class="text-left px-4 py-2">Status</th>
+            <th class="text-left px-4 py-2">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="border-t">
+            <td class="px-4 py-2">1</td>
+            <td class="px-4 py-2">Youssef</td>
+            <td class="px-4 py-2">2500 MAD</td>
+            <td class="px-4 py-2"><span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded">Pending</span></td>
+            <td class="px-4 py-2 space-x-2">
+              <button class="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600">Accept</button>
+              <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Reject</button>
+            </td>
+          </tr>
+          <!-- more rows -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
