@@ -1,6 +1,6 @@
 package org.event.herfa.entity;
 
-public enum DevisSatus {
+public enum DevisStatus {
     ACCEPTER,
     REFUSER,
     PENDING

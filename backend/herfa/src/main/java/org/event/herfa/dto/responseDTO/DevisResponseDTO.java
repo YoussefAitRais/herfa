@@ -1,6 +1,6 @@
 package org.event.herfa.dto.responseDTO;
 
-import org.event.herfa.entity.DevisSatus;
+import org.event.herfa.entity.DevisStatus;
 
 import java.time.LocalDate;
 
@@ -12,7 +12,7 @@ public record DevisResponseDTO(
 
         Double amount,
 
-        DevisSatus devisSatus,
+        DevisStatus devisStatus,
 
         Long clientId,
         String clientName,

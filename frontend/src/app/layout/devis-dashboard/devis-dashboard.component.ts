@@ -4,8 +4,10 @@ import { Devis, DevisService } from '../../services/devis/devis.service';
 @Component({
   selector: 'app-devis-dashboard',
   templateUrl: './devis-dashboard.component.html',
+  standalone: true,
   styleUrls: ['./devis-dashboard.component.css']
 })
+
 export class DevisDashboardComponent implements OnInit {
   devisList: Devis[] = [];
   loading: boolean = true;
@@ -18,7 +20,7 @@ export class DevisDashboardComponent implements OnInit {
   }
 
   loadDevis() {
-    this.devisService.getAllDevis(0).subscribe({
+    this.devisService.getAllDevis().subscribe({
       next: (data) => {
         this.devisList = data;
         this.loading = false;

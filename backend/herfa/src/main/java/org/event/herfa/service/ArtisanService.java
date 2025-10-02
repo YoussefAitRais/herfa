@@ -1,6 +1,8 @@
 package org.event.herfa.service;
 
 import org.event.herfa.entity.Artisan;
+import org.event.herfa.entity.Devis;
+import org.event.herfa.entity.DevisStatus;
 import org.event.herfa.repository.ArtisanRepository;
 import org.event.herfa.repository.DevisRepository;
 import org.springframework.http.HttpStatus;
@@ -57,6 +59,24 @@ public class ArtisanService {
         artisanRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    public Devis proposerDevis(Long artisanId, Devis devis, Long clientId) {
+        Artisan artisan = artisanRepository.findById(artisanId).orElseThrow();
+        devis.setArtisan(artisan);
+        devis.setStatus(DevisStatus.PENDING);
+        return devisRepository.save(devis);
+    }
+
+
+
+
+    public List<Devis> getAllDemandeDevisForArtisan(Long artisanId) {
+        return devisRepository.findAll().stream()
+                .filter(d -> d.getArtisan().getId().equals(artisanId))
+                .toList();
+    }
+
+
 
     public void deletById(Long id) {
         artisanRepository.deleteById(id);

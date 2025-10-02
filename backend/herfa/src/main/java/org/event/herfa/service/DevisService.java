@@ -2,7 +2,7 @@ package org.event.herfa.service;
 
 
 import org.event.herfa.entity.Devis;
-import org.event.herfa.entity.DevisSatus;
+import org.event.herfa.entity.DevisStatus;
 import org.event.herfa.repository.DevisRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,7 +77,7 @@ public class DevisService {
         return new ResponseEntity<>(devisRepository.findByArtisan_Id(artisanId), HttpStatus.OK);
     }
 
-    public ResponseEntity<Devis> updateStatusDevis(Long id, DevisSatus status) {
+    public ResponseEntity<Devis> updateStatusDevis(Long id, DevisStatus status) {
         Devis existingDevis = devisRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Devis not found"));
         existingDevis.setStatus(status);

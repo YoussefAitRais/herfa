@@ -4,20 +4,18 @@ import org.event.herfa.entity.Artisan;
 import org.event.herfa.service.ArtisanService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@Controller
 @RequestMapping("/artisans")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ArtisanController {
-
 
     private final ArtisanService artisansService;
 
-    public ArtisanController( ArtisanService artisansService) {
+    public ArtisanController(ArtisanService artisansService) {
         this.artisansService = artisansService;
     }
 
@@ -38,7 +36,6 @@ public class ArtisanController {
         return ResponseEntity.ok(artisan);
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<Artisan> updateArtisan(@RequestBody Artisan artisan , @PathVariable Long id) {
         Artisan updates = artisansService.findById(id);
@@ -52,7 +49,6 @@ public class ArtisanController {
         Artisan saved = artisansService.save(updates);
         return ResponseEntity.ok(saved);
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteArtisanById(@PathVariable Long id) {

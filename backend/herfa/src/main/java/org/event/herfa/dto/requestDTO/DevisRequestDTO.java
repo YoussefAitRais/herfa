@@ -1,6 +1,6 @@
 package org.event.herfa.dto.requestDTO;
 
-import org.event.herfa.entity.DevisSatus;
+import org.event.herfa.entity.DevisStatus;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -18,7 +18,7 @@ public record DevisRequestDTO(
     Double amount,
 
     @NotNull(message = "amount cannot be null")
-    DevisSatus devisSatus
+    DevisStatus devisStatus
 //        Long clientId,
 //        Long artisanId
 

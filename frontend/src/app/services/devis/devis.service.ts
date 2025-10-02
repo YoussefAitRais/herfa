@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Artisan} from "../artisan/artisan.service";
 import {Observable} from "rxjs";
-
 
 export interface Devis {
   id?: number;
   dateDevis: string;
   amount: number;
-  devisSatus: string;
+  status: string;
   clientId?: number;
   artisanId?: number;
 }
@@ -16,47 +14,45 @@ export interface Devis {
 @Injectable({
   providedIn: 'root'
 })
-
 export class DevisService {
 
   constructor(private http: HttpClient) { }
 
-  private apiUrl = 'http://localhost:8081/api/deviss';
+  private apiUrl = 'http://localhost:8081/api/devis';
 
-  createDevis (id: number, artisan: Artisan): Observable<Devis> {
-    return this.http.post<Devis>(`${this.apiUrl}/${artisan.id}`, artisan)
+  createDevis(devis: Devis): Observable<Devis> {
+    return this.http.post<Devis>(`${this.apiUrl}/create`, devis);
   }
 
-  getAllDevis (id: number): Observable<Devis[]> {
-    return this.http.get<Devis[]>(`${this.apiUrl}/${id}`)
+  getAllDevis(): Observable<Devis[]> {
+    return this.http.get<Devis[]>(`${this.apiUrl}/allDevis`);
   }
 
-  getDevisbyId (id: number): Observable<Devis> {
-    return this.http.get<Devis>(`${this.apiUrl}/${id}`)
+  getDevisById(id: number): Observable<Devis> {
+    return this.http.get<Devis>(`${this.apiUrl}/${id}`);
   }
 
-  updateDevis (id: number, artisan: Artisan): Observable<Devis> {
-    return this.http.put<Devis>(`${this.apiUrl}/${id}`, artisan)
+  updateDevis(id: number, devis: Devis): Observable<Devis> {
+    return this.http.put<Devis>(`${this.apiUrl}/${id}`, devis);
   }
 
-  deleteDevis (id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`)
+  deleteDevis(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  sendDevis (id: number, artisan: Artisan): Observable<Devis> {
-    return this.http.post<Devis>(`${this.apiUrl}/${id}`, artisan)
+  sendDevis(devis: Devis): Observable<Devis> {
+    return this.http.post<Devis>(`${this.apiUrl}/send`, devis);
   }
 
   listDevisByClient(clientId: number): Observable<Devis[]> {
     return this.http.get<Devis[]>(`${this.apiUrl}/Client/${clientId}`);
   }
 
-  listDevisByArtisan (artisanId: number): Observable<Devis[]> {
-    return this.http.get<Devis[]>(`${this.apiUrl}/Artisan/${artisanId}`)
+  listDevisByArtisan(artisanId: number): Observable<Devis[]> {
+    return this.http.get<Devis[]>(`${this.apiUrl}/Artisan/${artisanId}`);
   }
 
   updateStatus(id: number, status: string): Observable<Devis> {
     return this.http.put<Devis>(`${this.apiUrl}/${id}/status?status=${status}`, {});
   }
-
 }

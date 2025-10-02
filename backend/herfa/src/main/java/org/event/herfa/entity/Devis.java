@@ -18,7 +18,7 @@ public class Devis {
 
 
     @Enumerated(EnumType.STRING)
-    private DevisSatus status;
+    private DevisStatus status;
 
     @ManyToOne
     private Client client;
@@ -27,11 +27,14 @@ public class Devis {
     private Artisan artisan;
 
 
-    public Devis(Long id, BigDecimal amount, LocalDateTime dateDevis) {
-        this.id = id;
+    public Devis(BigDecimal amount, LocalDateTime dateDevis, DevisStatus status, Client client, Artisan artisan) {
         this.amount = amount;
         this.dateDevis = dateDevis;
+        this.status = status;
+        this.client = client;
+        this.artisan = artisan;
     }
+
 
 
     public Devis() {
@@ -60,13 +63,18 @@ public class Devis {
         this.dateDevis = dateDevis;
     }
 
-    public DevisSatus getStatus() {
-        return status;
+    public DevisStatus getStatus() {
+        return status = status;
     }
 
-    public void setStatus(DevisSatus status) {
+    public void setStatus(DevisStatus status) {
         this.status = status;
     }
 
+    public Client getClient() { return client; }
+    public void setClient(Client client) { this.client = client; }
+
+    public Artisan getArtisan() { return artisan; }
+    public void setArtisan(Artisan artisan) { this.artisan = artisan; }
 
 }

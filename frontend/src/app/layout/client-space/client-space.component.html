@@ -1,0 +1,193 @@
+<div class="min-h-screen bg-gray-50 py-8">
+  <div class="max-w-6xl mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <h1 class="text-3xl font-bold text-gray-800">Client Space</h1>
+      <p class="text-gray-600 mt-2">Request services from artisans and manage your requests</p>
+    </div>
+
+    <!-- Client Selection View -->
+    <div *ngIf="showClientSelection" class="bg-white rounded-xl shadow-md p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold text-gray-700">Select Your Account</h2>
+      </div>
+
+      <!-- Clients Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div 
+          *ngFor="let client of clients" 
+          class="border rounded-lg p-4 hover:shadow-md transition duration-300 cursor-pointer bg-white hover:bg-blue-50"
+          (click)="selectClient(client.id!)">
+          <div class="flex items-center">
+            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+            <div class="ml-4">
+              <h3 class="font-semibold text-lg text-gray-800">{{ client.name }}</h3>
+              <p class="text-gray-600 text-sm">{{ client.email }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="clients.length === 0" class="text-center py-10">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">No clients found</h3>
+        <p class="mt-1 text-sm text-gray-500">Please add clients to the system first.</p>
+      </div>
+    </div>
+
+    <!-- Artisan List View -->
+    <div *ngIf="showArtisanList" class="bg-white rounded-xl shadow-md p-6">
+      <div class="flex justify-between items-center mb-6">
+        <div>
+          <h2 class="text-xl font-semibold text-gray-700">Available Artisans</h2>
+          <p class="text-gray-500 text-sm mt-1">Select an artisan to request a service</p>
+        </div>
+        <div class="flex space-x-3">
+          <button
+            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-300"
+            (click)="backToClientSelection()">
+            Back
+          </button>
+          <button
+            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition duration-300"
+            (click)="viewMyDevis()">
+            My Requests
+          </button>
+        </div>
+      </div>
+
+      <!-- Artisans Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div 
+          *ngFor="let artisan of artisans" 
+          class="border rounded-lg p-4 hover:shadow-md transition duration-300 bg-white">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-semibold text-lg text-gray-800">{{ artisan.name }}</h3>
+              <p class="text-blue-600 font-medium">{{ artisan.job }}</p>
+              <p class="text-gray-600 text-sm mt-1">{{ artisan.location }}</p>
+              <p class="text-gray-500 text-sm mt-2">{{ artisan.description }}</p>
+            </div>
+          </div>
+          <div class="mt-4">
+            <button
+              class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300"
+              (click)="requestDevisToArtisan(artisan.id!)">
+              Request Service
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="artisans.length === 0" class="text-center py-10">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">No artisans available</h3>
+        <p class="mt-1 text-sm text-gray-500">Please add artisans to the system first.</p>
+      </div>
+    </div>
+
+    <!-- Devis List View -->
+    <div *ngIf="showDevisList" class="bg-white rounded-xl shadow-md p-6">
+      <div class="flex justify-between items-center mb-6">
+        <div>
+          <h2 class="text-xl font-semibold text-gray-700">My Service Requests</h2>
+          <p class="text-gray-500 text-sm mt-1">Track your requests and responses</p>
+        </div>
+        <div class="flex space-x-3">
+          <button
+            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-300"
+            (click)="backToClientSelection()">
+            Back
+          </button>
+          <button
+            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300"
+            (click)="showArtisanList = true; showDevisList = false;">
+            Request Service
+          </button>
+        </div>
+      </div>
+
+      <!-- Devis Table -->
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Artisan</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let devis of devisList" class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{ devis.dateDevis | date:'short' }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <span *ngIf="devis.artisanId; else noArtisan">
+                  {{ getArtisanName(devis.artisanId) }}
+                </span>
+                <ng-template #noArtisan>
+                  <span class="text-gray-400">Not assigned</span>
+                </ng-template>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                ${{ devis.amount }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span 
+                  class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                  [ngClass]="{
+                    'bg-yellow-100 text-yellow-800': devis.status === 'PENDING',
+                    'bg-green-100 text-green-800': devis.status === 'ACCEPTER',
+                    'bg-red-100 text-red-800': devis.status === 'REFUSER'
+                  }">
+                  {{ devis.status }}
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <div class="flex space-x-2">
+                  <button 
+                    *ngIf="devis.status === 'PENDING'" 
+                    (click)="updateDevisStatus(devis.id!, 'ACCEPTER')"
+                    class="text-green-600 hover:text-green-900 bg-green-100 hover:bg-green-200 px-3 py-1 rounded">
+                    Accept
+                  </button>
+                  <button 
+                    *ngIf="devis.status === 'PENDING'" 
+                    (click)="updateDevisStatus(devis.id!, 'REFUSER')"
+                    class="text-red-600 hover:text-red-900 bg-red-100 hover:bg-red-200 px-3 py-1 rounded">
+                    Refuse
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="devisList.length === 0" class="text-center py-10">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">No service requests</h3>
+        <p class="mt-1 text-sm text-gray-500">Request a service from an artisan to get started.</p>
+        <div class="mt-6">
+          <button
+            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300"
+            (click)="showArtisanList = true; showDevisList = false;">
+            Request Service
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

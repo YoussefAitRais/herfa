@@ -1,7 +1,7 @@
 package org.event.herfa.controller;
 
 import org.event.herfa.entity.Devis;
-import org.event.herfa.entity.DevisSatus;
+import org.event.herfa.entity.DevisStatus;
 import org.event.herfa.service.DevisService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/devis")
+@CrossOrigin(origins = "http://localhost:4200")
 public class DevisController {
-
 
     private final DevisService devisService;
 
@@ -24,7 +24,6 @@ public class DevisController {
     public ResponseEntity<Devis> createDevis (@RequestBody Devis devis) {
         return devisService.createDevis(devis);
     }
-
 
     @GetMapping("/allDevis")
     public ResponseEntity<List<Devis>> getAllDevis() {
@@ -69,20 +68,11 @@ public class DevisController {
     }
 
     @PutMapping("/{id}/status")
-    public ResponseEntity<Devis> updateDevisStatus(@PathVariable Long id, @RequestParam DevisSatus status) {
+    public ResponseEntity<Devis> updateDevisStatus(@PathVariable Long id, @RequestParam DevisStatus status) {
         return devisService.updateStatusDevis(id, status);
     }
 
     public static class updateDevisStatusRequest {
-        public DevisSatus satus;
+        public DevisStatus satus;
     }
-
-
-
-
-
-
-
-
-
 }

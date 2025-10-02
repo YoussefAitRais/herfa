@@ -1,18 +1,18 @@
 package org.event.herfa.controller;
 
-
 import org.event.herfa.entity.Client;
+import org.event.herfa.entity.Devis;
+import org.event.herfa.entity.DevisStatus;
 import org.event.herfa.service.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@Controller
 @RequestMapping("/client")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClientController {
 
     private final ClientService clientService;
@@ -38,7 +38,7 @@ public class ClientController {
     }
 
     @PutMapping("/{id}/update")
-    public ResponseEntity<Client> updateClient(@RequestBody Long id, @RequestBody Client client) {
+    public ResponseEntity<Client> updateClient(@PathVariable Long id, @RequestBody Client client) {
         Client updatedClient = clientService.updateClient(id, client);
         return ResponseEntity.ok(updatedClient);
     }
@@ -54,6 +54,13 @@ public class ClientController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/{id}/demander-devis")
+    public Devis demanderDevis(@PathVariable Long id, @RequestBody Devis devis) {
+        return clientService.demanderDevis(id, devis);
+    }
 
-
+    @PutMapping("/devis/{id}/status")
+    public Devis updateDevisStatus(@PathVariable Long id, @RequestParam DevisStatus status) {
+        return clientService.updateDevisStatus(id, status);
+    }
 }
