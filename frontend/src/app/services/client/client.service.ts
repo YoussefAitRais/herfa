@@ -1,6 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { Injectable } from '@angular/core';
+import {Devis} from "../devis/devis.service";
 
 export interface Client {
   id?: number;
@@ -41,4 +42,17 @@ export class ClientService {
   deleteAllClient(): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/deleteAllClient`);
   }
+
+  demanderDevis(clientId: number, devis: Devis): Observable<Devis> {
+    return this.http.post<Devis>(`${this.apiUrl}/${clientId}/demander-devis`, devis);
+  }
+
+  listDevis(clientId: number): Observable<Devis[]> {
+    return this.http.get<Devis[]>(`${this.apiUrl}/${clientId}/devis`);
+  }
+
+  updateDevisStatus(devisId: number, status: string): Observable<Devis> {
+    return this.http.put<Devis>(`${this.apiUrl}/devis/${devisId}/status?status=${status}`, {});
+  }
+
 }

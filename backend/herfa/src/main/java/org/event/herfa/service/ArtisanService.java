@@ -14,8 +14,8 @@ import java.util.List;
 @Service
 public class ArtisanService {
 
-    private ArtisanRepository artisanRepository;
-    private DevisRepository devisRepository;
+    private final ArtisanRepository artisanRepository;
+    private final DevisRepository devisRepository;
 
     public ArtisanService(ArtisanRepository artisanRepository, DevisRepository devisRepository) {
         this.artisanRepository = artisanRepository;
@@ -67,16 +67,11 @@ public class ArtisanService {
         return devisRepository.save(devis);
     }
 
-
-
-
     public List<Devis> getAllDemandeDevisForArtisan(Long artisanId) {
         return devisRepository.findAll().stream()
                 .filter(d -> d.getArtisan().getId().equals(artisanId))
                 .toList();
     }
-
-
 
     public void deletById(Long id) {
         artisanRepository.deleteById(id);

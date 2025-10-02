@@ -14,8 +14,8 @@ import java.util.List;
 @Service
 public class ClientService {
 
-    private ClientRepository clientRepository;
-    private DevisRepository devisRepository;
+    private final ClientRepository clientRepository;
+    private final DevisRepository devisRepository;
 
 
     public ClientService(ClientRepository clientRepository, DevisRepository devisRepository) {

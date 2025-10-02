@@ -40,4 +40,9 @@ export class ArtisanService {
   deleteArtisanById(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  getDevisByArtisan(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${id}/devis`);
+  }
+
 }
