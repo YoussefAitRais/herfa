@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class ClientService {
 
-    private final ClientRepository clientRepository;
+    private  final ClientRepository clientRepository;
     private final DevisRepository devisRepository;
 
 
@@ -23,7 +23,7 @@ public class ClientService {
         this.devisRepository = devisRepository;
     }
 
-    public ResponseEntity<Client> createClient(Client client) {
+    public  ResponseEntity<Client> createClient(Client client) {
         Client saved = clientRepository.save(client);
         return new ResponseEntity<>(saved , HttpStatus.CREATED);
     }
