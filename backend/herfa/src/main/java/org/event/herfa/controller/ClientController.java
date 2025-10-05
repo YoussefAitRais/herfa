@@ -59,6 +59,11 @@ public class ClientController {
         return clientService.demanderDevis(id, devis);
     }
 
+    @GetMapping("/{id}/devis")
+    public List<Devis> getAllDevisForClient(@PathVariable Long id) {
+        return (List<Devis>) clientService.getAllDevisForClient(id);
+    }
+
     @PutMapping("/devis/{id}/status")
     public Devis updateDevisStatus(@PathVariable Long id, @RequestParam DevisStatus status) {
         return clientService.updateDevisStatus(id, status);

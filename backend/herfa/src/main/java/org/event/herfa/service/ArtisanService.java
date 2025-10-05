@@ -67,10 +67,11 @@ public class ArtisanService {
         return devisRepository.save(devis);
     }
 
-    public List<Devis> getAllDemandeDevisForArtisan(Long artisanId) {
-        return devisRepository.findAll().stream()
-                .filter(d -> d.getArtisan().getId().equals(artisanId))
+    public ResponseEntity<List<Devis>> getAllDevisForArtisan(Long artisanId) {
+        List<Devis> devisList = devisRepository.findAll().stream()
+                .filter(d -> d.getArtisan() != null && d.getArtisan().getId().equals(artisanId))
                 .toList();
+        return new ResponseEntity<>(devisList, HttpStatus.OK);
     }
 
     public void deletById(Long id) {

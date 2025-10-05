@@ -1,5 +1,6 @@
 package org.event.herfa.controller;
 
+import org.event.herfa.dto.requestDTO.DevisRequestDTO;
 import org.event.herfa.entity.Devis;
 import org.event.herfa.entity.DevisStatus;
 import org.event.herfa.service.DevisService;
@@ -53,8 +54,8 @@ public class DevisController {
     //Operations spécifiques
 
     @PostMapping("/send")
-    public ResponseEntity<Devis> sendDevis(@Valid @RequestBody Devis devis) {
-        return devisService.sendDevis(devis);
+    public ResponseEntity<Devis> sendDevis(@Valid @RequestBody DevisRequestDTO devisRequestDTO) {
+        return devisService.sendDevis(devisRequestDTO);
     }
 
     @GetMapping("/Client/{clientId}")
