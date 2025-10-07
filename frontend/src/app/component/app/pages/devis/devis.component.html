@@ -1,1 +1,79 @@
-<p>devis works!</p>
+<div class="max-w-6xl mx-auto">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">Received Devis</h1>
+  
+  <!-- Devis Requests Section -->
+  <div class="bg-white shadow rounded-lg overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-200">
+      <h2 class="text-xl font-semibold text-gray-700">Devis Requests Received</h2>
+    </div>
+    
+    <div *ngIf="devisList.length === 0" class="p-6 text-center text-gray-500">
+      No devis requests received yet.
+    </div>
+    
+    <div *ngIf="devisList.length > 0" class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              ID
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Date
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Amount
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Status
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let devis of devisList">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {{ devis.id }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {{ devis.dateDevis | date:'short' }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {{ devis.amount }} MAD
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span 
+                [ngClass]="{
+                  'bg-yellow-200 text-yellow-800': devis.status === 'PENDING',
+                  'bg-green-200 text-green-800': devis.status === 'ACCEPTER',
+                  'bg-red-200 text-red-800': devis.status === 'REFUSER'
+                }" 
+                class="px-2 py-1 rounded-full text-xs font-medium">
+                {{ devis.status }}
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <button 
+                *ngIf="devis.status === 'PENDING'" 
+                (click)="updateDevisStatus(devis.id!, 'ACCEPTER')"
+                class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded mr-2">
+                Accept
+              </button>
+              <button 
+                *ngIf="devis.status === 'PENDING'" 
+                (click)="updateDevisStatus(devis.id!, 'REFUSER')"
+                class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
+                Refuse
+              </button>
+              <span *ngIf="devis.status !== 'PENDING'" class="text-gray-400">
+                No actions
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

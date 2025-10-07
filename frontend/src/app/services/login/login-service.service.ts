@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Client} from "../client/client.service";
-import {Artisan} from "../artisan/artisan.service";
+import {ArtisanModel} from "../../models/artisan-model";
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,8 @@ export class LoginServiceService {
     return this.http.get<Client[]>(`${this.apiUrl}/allClient`);
   }
 
-  fetchArtisanList():Observable<Artisan[]> {
-    return this.http.get<Artisan[]>(`${this.apiUrl}/allArtisan`);
+  fetchArtisanList():Observable<ArtisanModel[]> {
+    return this.http.get<ArtisanModel[]>(`${this.apiUrl}/allArtisan`);
   }
 
 

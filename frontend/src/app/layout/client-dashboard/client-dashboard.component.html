@@ -5,8 +5,8 @@
   <div class="mb-8">
     <h2 class="text-xl font-semibold mb-4 text-gray-700">Select a Client</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div 
-        *ngFor="let client of clients" 
+      <div
+        *ngFor="let client of clients"
         (click)="selectClient(client.id!)"
         class="border border-gray-300 p-4 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors"
         [class.bg-blue-100]="selectedClientId === client.id">
@@ -20,7 +20,7 @@
   <div *ngIf="selectedClientId" class="border border-gray-300 p-6 rounded-lg bg-white">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-xl font-semibold text-gray-700">Devis Management</h2>
-      <button 
+      <button
         (click)="viewArtisans()"
         class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
         Request New Devis
@@ -31,16 +31,16 @@
     <div *ngIf="showArtisans" class="mb-6">
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-lg font-medium text-gray-700">Select an Artisan</h3>
-        <button 
+        <button
           (click)="backToDevis()"
           class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded transition-colors">
           Back
         </button>
       </div>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-        <div 
-          *ngFor="let artisan of artisans" 
+        <div
+          *ngFor="let artisan of artisans"
           (click)="selectArtisan(artisan.id!)"
           class="border border-gray-300 p-4 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors"
           [class.bg-blue-100]="selectedArtisanId === artisan.id">
@@ -54,13 +54,13 @@
         <h4 class="text-md font-medium mb-3">Request Devis from Selected Artisan</h4>
         <div class="mb-4">
           <label class="block text-gray-700 mb-2">Estimated Amount ($):</label>
-          <input 
-            type="number" 
-            [(ngModel)]="newDevisAmount" 
+          <input
+            type="number"
+            [(ngModel)]="newDevisAmount"
             name="amount"
             class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
-        <button 
+        <button
           (click)="requestDevis()"
           class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition-colors">
           Send Devis Request
@@ -71,18 +71,18 @@
     <!-- Devis List (shown by default) -->
     <div *ngIf="!showArtisans">
       <h3 class="text-lg font-medium mb-4 text-gray-700">My Devis Requests</h3>
-      
+
       <div *ngIf="devisList.length === 0" class="p-6 text-center text-gray-500">
         No devis requests yet.
       </div>
-      
+
       <div *ngFor="let devis of devisList" class="border border-gray-200 p-4 rounded-lg mb-3">
         <div class="flex justify-between items-center">
           <div>
             <p class="font-medium">Amount: ${{ devis.amount }}</p>
             <p class="text-gray-600 text-sm">Date: {{ devis.dateDevis | date:'short' }}</p>
             <p class="mt-1">
-              <span 
+              <span
                 [ngClass]="{
                   'bg-yellow-100 text-yellow-800': devis.status === 'PENDING',
                   'bg-green-100 text-green-800': devis.status === 'ACCEPTER',
@@ -94,12 +94,12 @@
             </p>
           </div>
           <div *ngIf="devis.status === 'PENDING'">
-            <button 
+            <button
               (click)="updateDevisStatus(devis.id!, 'ACCEPTER')"
               class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded mr-2 transition-colors">
               Accept
             </button>
-            <button 
+            <button
               (click)="updateDevisStatus(devis.id!, 'REFUSER')"
               class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition-colors">
               Refuse

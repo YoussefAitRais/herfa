@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService, Client } from '../../services/client/client.service';
 import { DevisService, Devis } from '../../services/devis/devis.service';
-import { ArtisanService, Artisan } from '../../services/artisan/artisan.service';
+import { ArtisanService } from '../../services/artisan/artisan.service';
 import { FormsModule } from "@angular/forms";
 import { RouterLink } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import {ArtisanModel} from "../../models/artisan-model";
 
 @Component({
   selector: 'app-client-dashboard',
   standalone: true,
   imports: [
     FormsModule,
-    RouterLink,
     CommonModule
   ],
   templateUrl: './client-dashboard.component.html',
@@ -19,7 +19,7 @@ import { CommonModule } from "@angular/common";
 })
 export class ClientDashboardComponent implements OnInit {
   clients: Client[] = [];
-  artisans: Artisan[] = [];
+  artisans: ArtisanModel[] = [];
   devisList: Devis[] = [];
   selectedClientId: number | null = null;
   showArtisans = false;

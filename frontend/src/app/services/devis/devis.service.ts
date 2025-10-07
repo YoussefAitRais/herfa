@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export interface Devis {
   id?: number;
   dateDevis: string;
   amount: number;
   status: string;
+  clientId?: number;
+  artisanId?: number;
+}
+
+// Add this interface for the DTO that matches the backend
+export interface DevisRequestDTO {
+  dateDevis: string;
+  amount: number;
+  devisStatus: string;
   clientId?: number;
   artisanId?: number;
 }
@@ -41,7 +50,16 @@ export class DevisService {
   }
 
   sendDevis(devis: Devis): Observable<Devis> {
-    return this.http.post<Devis>(`${this.apiUrl}/send`, devis);
+    // Convert Devis to DevisRequestDTO
+    const devisRequestDTO: DevisRequestDTO = {
+      dateDevis: devis.dateDevis,
+      amount: devis.amount,
+      devisStatus: devis.status,
+      clientId: devis.clientId,
+      artisanId: devis.artisanId
+    };
+    
+    return this.http.post<Devis>(`${this.apiUrl}/send`, devisRequestDTO);
   }
 
   listDevisByClient(clientId: number): Observable<Devis[]> {

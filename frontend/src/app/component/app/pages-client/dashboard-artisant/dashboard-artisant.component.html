@@ -1,0 +1,173 @@
+<!-- Request Form Modal -->
+<div *ngIf="showRequestForm && selectedClient" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+    <div class="px-6 py-4 border-b border-gray-200">
+      <h2 class="text-xl font-semibold text-gray-700">Request Devis from {{ selectedClient.name }}</h2>
+    </div>
+    
+    <div class="p-6">
+      <!-- Success Message -->
+      <div *ngIf="requestMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+        {{ requestMessage }}
+      </div>
+      
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        {{ errorMessage }}
+      </div>
+      
+      <!-- Client Info -->
+      <div class="mb-4">
+        <p class="text-gray-600"><strong>Phone:</strong> {{ selectedClient.phoneNumber }}</p>
+        <p class="text-gray-600"><strong>Email:</strong> {{ selectedClient.email }}</p>
+      </div>
+      
+      <!-- Amount Input -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
+          Amount (MAD)
+        </label>
+        <input
+          id="amount"
+          type="number"
+          [(ngModel)]="amount"
+          placeholder="Enter amount"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+        />
+      </div>
+      
+      <!-- Buttons -->
+      <div class="flex justify-end space-x-3">
+        <button
+          (click)="hideRequestForm()"
+          class="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium rounded"
+        >
+          Cancel
+        </button>
+        <button
+          (click)="requestDevis()"
+          [disabled]="!amount || amount <= 0"
+          class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Send Request
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+  <div class="bg-white shadow rounded-lg p-4">
+    <h3 class="text-gray-500">Total Devis</h3>
+    <p class="text-2xl font-bold">{{ totalDevis }}</p>
+  </div>
+  <div class="bg-white shadow rounded-lg p-4">
+    <h3 class="text-gray-500">Accepted Devis</h3>
+    <p class="text-2xl font-bold">{{ acceptedDevis }}</p>
+  </div>
+  <div class="bg-white shadow rounded-lg p-4">
+    <h3 class="text-gray-500">Pending Devis</h3>
+    <p class="text-2xl font-bold">{{ pendingDevis }}</p>
+  </div>
+</div>
+
+<!-- Client List for Requesting Devis -->
+<div class="bg-white shadow rounded-lg p-6 mb-6">
+  <div class="flex justify-between mb-4">
+    <h2 class="text-lg font-bold">Request Devis from Clients</h2>
+  </div>
+  
+  <div *ngIf="clients.length === 0" class="text-center py-4 text-gray-500">
+    No clients found.
+  </div>
+  
+  <div *ngIf="clients.length > 0" class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="text-left px-4 py-2">Name</th>
+          <th class="text-left px-4 py-2">Email</th>
+          <th class="text-left px-4 py-2">Phone</th>
+          <th class="text-left px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients" class="border-t">
+          <td class="px-4 py-2">{{ client.name }}</td>
+          <td class="px-4 py-2">{{ client.email }}</td>
+          <td class="px-4 py-2">{{ client.phoneNumber }}</td>
+          <td class="px-4 py-2">
+            <button
+              (click)="showRequestFormFor(client)"
+              class="text-green-600 hover:text-green-900 bg-green-100 hover:bg-green-200 px-3 py-1 rounded"
+            >
+              Request Devis
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Devis Table -->
+<div class="bg-white shadow rounded-lg p-6">
+  <div class="flex justify-between mb-4">
+    <h2 class="text-lg font-bold">My Devis Requests</h2>
+  </div>
+  
+  <div *ngIf="devisList.length === 0" class="text-center py-4 text-gray-500">
+    No devis found.
+  </div>
+  
+  <table *ngIf="devisList.length > 0" class="w-full table-auto">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="text-left px-4 py-2">ID</th>
+        <th class="text-left px-4 py-2">Date</th>
+        <th class="text-left px-4 py-2">Amount</th>
+        <th class="text-left px-4 py-2">Status</th>
+        <th class="text-left px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let devis of devisList" class="border-t">
+        <td class="px-4 py-2">{{ devis.id }}</td>
+        <td class="px-4 py-2">{{ devis.dateDevis | date:'short' }}</td>
+        <td class="px-4 py-2">{{ devis.amount }} MAD</td>
+        <td class="px-4 py-2">
+          <span 
+            [ngClass]="{
+              'bg-yellow-200 text-yellow-800': devis.status === 'PENDING',
+              'bg-green-200 text-green-800': devis.status === 'ACCEPTER',
+              'bg-red-200 text-red-800': devis.status === 'REFUSER'
+            }" 
+            class="px-2 py-1 rounded"
+          >
+            {{ devis.status }}
+          </span>
+        </td>
+        <td class="px-4 py-2 space-x-2">
+          <button 
+            *ngIf="devis.status === 'PENDING'" 
+            (click)="updateDevisStatus(devis.id!, 'ACCEPTER')"
+            class="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
+          >
+            Accept
+          </button>
+          <button 
+            *ngIf="devis.status === 'PENDING'" 
+            (click)="updateDevisStatus(devis.id!, 'REFUSER')"
+            class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+          >
+            Reject
+          </button>
+          <span *ngIf="devis.status !== 'PENDING'" class="text-gray-400">
+            No actions
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

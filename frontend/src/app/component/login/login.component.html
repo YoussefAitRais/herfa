@@ -4,33 +4,41 @@
     <!-- Two Buttons -->
     <div class="flex justify-center gap-6">
       <button
-        class="px-6 py-3 rounded-lg bg-green-600 hover:bg-green-700 transition font-semibold">
+        class="px-6 py-3 rounded-lg bg-green-600 hover:bg-green-700 transition font-semibold" (click)="fetchArtisans()">
         Artisan
       </button>
 
       <button
-        class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition font-semibold">
+        class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition font-semibold" (click)="fetchClients()">
         Client
       </button>
     </div>
 
-    <!-- Phrase + Select -->
-    <div class="flex items-center justify-center gap-3">
-      <p class="text-lg font-medium text-gray-300">I am</p>
-      <select
-        class="bg-[#2d317e] text-white text-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        <option value="">Select...</option>
-        <option value="client">Client</option>
-        <option value="artisan">Artisan</option>
-      </select>
-    </div>
+    <form #loginFormElement (ngSubmit)="onLoginFormSubmit( loginFormElement )" >
+      <!-- Phrase + Select -->
+      <div class="flex items-center justify-center gap-3">
+        <p class="text-lg font-medium text-gray-300">I am</p>
+        <select
+          class="bg-[#2d317e] text-white text-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          name="user"
+          [(ngModel)]="formObj.user"
+        >
+          <option value="">Select...</option>
+          @for( user of users; track user) {
+            <option value='{{ JSON.stringify(user) }}'> {{ user.name }} </option>
+          }
+        </select>
+      </div>
 
-    <!-- Take Me to Dashboard Button -->
-    <button
-      class="w-full py-3 rounded-lg bg-gray-600 hover:bg-gray-700 transition font-semibold text-white">
-      Take me to Dashboard
-    </button>
+      <!-- Take Me to Dashboard Button -->
+      <button
+        class="w-full py-3 rounded-lg bg-gray-600 hover:bg-gray-700 transition font-semibold text-white"
+        type="submit"
+      >
+        Take me to Dashboard
+      </button>
+    </form>
+
 
   </div>
 </div>

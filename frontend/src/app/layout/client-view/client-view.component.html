@@ -1,0 +1,112 @@
+<div class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-6 text-gray-800">Client View</h1>
+
+  <!-- Client Selection -->
+  <div class="mb-8">
+    <h2 class="text-xl font-semibold mb-4 text-gray-700">Select a Client</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div 
+        *ngFor="let client of clients" 
+        (click)="selectClient(client.id!)"
+        class="border border-gray-300 p-4 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors"
+        [class.bg-blue-100]="selectedClientId === client.id">
+        <h3 class="font-medium text-lg text-gray-800">{{ client.name }}</h3>
+        <p class="text-gray-600">{{ client.email }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content (shown when client is selected) -->
+  <div *ngIf="selectedClientId" class="border border-gray-300 p-6 rounded-lg bg-white">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-semibold text-gray-700">Devis Management</h2>
+      <button 
+        (click)="viewClients()"
+        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+        Request New Devis
+      </button>
+    </div>
+
+    <!-- Clients List (shown when requesting new devis) -->
+    <div *ngIf="showClients" class="mb-6">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-medium text-gray-700">Select a Client</h3>
+        <button 
+          (click)="backToDevis()"
+          class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded transition-colors">
+          Back
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div 
+          *ngFor="let client of clients" 
+          (click)="selectClientForDevis(client.id!)"
+          class="border border-gray-300 p-4 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors"
+          [class.bg-blue-100]="selectedClientForDevisId === client.id">
+          <h4 class="font-medium text-gray-800">{{ client.name }}</h4>
+          <p class="text-gray-600">{{ client.phoneNumber }}</p>
+        </div>
+      </div>
+
+      <!-- Devis Request Form -->
+      <div *ngIf="selectedClientForDevisId" class="border border-gray-200 p-4 rounded-lg bg-gray-50">
+        <h4 class="text-md font-medium mb-3">Request Devis from Selected Client</h4>
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-2">Estimated Amount ($):</label>
+          <input 
+            type="number" 
+            [(ngModel)]="newDevisAmount" 
+            name="amount"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <button 
+          (click)="requestDevis()"
+          class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition-colors">
+          Send Devis Request
+        </button>
+      </div>
+    </div>
+
+    <!-- Devis List (shown by default) -->
+    <div *ngIf="!showClients">
+      <h3 class="text-lg font-medium mb-4 text-gray-700">My Devis Requests</h3>
+      
+      <div *ngIf="devisList.length === 0" class="p-6 text-center text-gray-500">
+        No devis requests yet.
+      </div>
+      
+      <div *ngFor="let devis of devisList" class="border border-gray-200 p-4 rounded-lg mb-3">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="font-medium">Amount: ${{ devis.amount }}</p>
+            <p class="text-gray-600 text-sm">Date: {{ devis.dateDevis | date:'short' }}</p>
+            <p class="mt-1">
+              <span 
+                [ngClass]="{
+                  'bg-yellow-100 text-yellow-800': devis.status === 'PENDING',
+                  'bg-green-100 text-green-800': devis.status === 'ACCEPTER',
+                  'bg-red-100 text-red-800': devis.status === 'REFUSER'
+                }"
+                class="px-2 py-1 rounded-full text-xs font-medium">
+                {{ devis.status }}
+              </span>
+            </p>
+          </div>
+          <div *ngIf="devis.status === 'PENDING'">
+            <button 
+              (click)="updateDevisStatus(devis.id!, 'ACCEPTER')"
+              class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded mr-2 transition-colors">
+              Accept
+            </button>
+            <button 
+              (click)="updateDevisStatus(devis.id!, 'REFUSER')"
+              class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition-colors">
+              Refuse
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

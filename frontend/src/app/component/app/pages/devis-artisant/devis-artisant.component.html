@@ -1,0 +1,59 @@
+<div class="bg-white shadow rounded-lg p-6">
+  <div class="flex justify-between mb-4">
+    <h2 class="text-lg font-bold">Devis Requests</h2>
+  </div>
+  
+  <div *ngIf="devisList.length === 0" class="text-center py-4 text-gray-500">
+    No devis requests found.
+  </div>
+  
+  <table *ngIf="devisList.length > 0" class="w-full table-auto">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="text-left px-4 py-2">ID</th>
+        <th class="text-left px-4 py-2">Date</th>
+        <th class="text-left px-4 py-2">Amount</th>
+        <th class="text-left px-4 py-2">Status</th>
+        <th class="text-left px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let devis of devisList" class="border-t">
+        <td class="px-4 py-2">{{ devis.id }}</td>
+        <td class="px-4 py-2">{{ devis.dateDevis | date:'short' }}</td>
+        <td class="px-4 py-2">{{ devis.amount }} MAD</td>
+        <td class="px-4 py-2">
+          <span 
+            [ngClass]="{
+              'bg-yellow-200 text-yellow-800': devis.status === 'PENDING',
+              'bg-green-200 text-green-800': devis.status === 'ACCEPTER',
+              'bg-red-200 text-red-800': devis.status === 'REFUSER'
+            }" 
+            class="px-2 py-1 rounded"
+          >
+            {{ devis.status }}
+          </span>
+        </td>
+        <td class="px-4 py-2 space-x-2">
+          <button 
+            *ngIf="devis.status === 'PENDING'" 
+            (click)="updateDevisStatus(devis.id!, 'ACCEPTER')"
+            class="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
+          >
+            Accept
+          </button>
+          <button 
+            *ngIf="devis.status === 'PENDING'" 
+            (click)="updateDevisStatus(devis.id!, 'REFUSER')"
+            class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+          >
+            Reject
+          </button>
+          <span *ngIf="devis.status !== 'PENDING'" class="text-gray-400">
+            No actions
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -20,6 +20,18 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     this.router.navigate(["/app/dashboard"]);
+
+    const storedRole = localStorage.getItem("role");
+    const normalizedRole = storedRole?.trim().toLowerCase();
+
+    if (!localStorage.getItem('user')) {
+      this.router.navigate(['/login']);
+    }
+
+    if (normalizedRole === "client") {
+      console.log("Redirecting to dashboard...");
+      this.router.navigate(['/app/client-dashboard']);
+    }
   }
 
 }

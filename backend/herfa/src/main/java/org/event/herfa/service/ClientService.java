@@ -29,13 +29,12 @@ public class ClientService {
     }
 
     public ResponseEntity<Client> getClientById(Long id) {
-        System.out.println(id);
+
         Client clients = clientRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Client not found"));
         return new ResponseEntity<>(clients, HttpStatus.OK);
 
     }
-
 
     public ResponseEntity<List<Client>> getAllClients() {
         List<Client> clients = clientRepository.findAll();
@@ -78,9 +77,7 @@ public class ClientService {
     }
 
     public ResponseEntity<List<Devis>> getAllDevisForClient(Long clientId) {
-        List<Devis> devisList = devisRepository.findAll().stream()
-                .filter(d -> d.getClient() != null && d.getClient().getId().equals(clientId))
-                .toList();
+        List<Devis> devisList = devisRepository.findByClient_Id(clientId);
         return new ResponseEntity<>(devisList, HttpStatus.OK);
     }
 }

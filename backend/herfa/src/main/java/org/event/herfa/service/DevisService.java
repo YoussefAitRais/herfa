@@ -24,17 +24,15 @@ public class DevisService {
     private final DevisRepository devisRepository;
     private final ArtisanService artisanService;
     private final ClientService clientService;
-    private final InternalResourceViewResolver defaultViewResolver;
 
     public DevisService(
             DevisRepository devisRepository,
             ArtisanService artisanService,
-            ClientService clientService,
-            InternalResourceViewResolver defaultViewResolver) {
+            ClientService clientService
+    ) {
         this.devisRepository = devisRepository;
         this.artisanService = artisanService;
         this.clientService = clientService;
-        this.defaultViewResolver = defaultViewResolver;
     }
 
 
@@ -79,26 +77,29 @@ public class DevisService {
     //Operations spécifiques
 
     public ResponseEntity<Devis> sendDevis(DevisRequestDTO devisRequestDTO) {
-        System.out.println(devisRequestDTO.clientId());
+        System.out.println("Sending devis: " + devisRequestDTO.toString());
         // get client by id
-        Client client = clientService.getClientById(devisRequestDTO.clientId() ).getBody();
-
-        // get artisan by is
+        Client client = clientService.getClientById(devisRequestDTO.clientId()).getBody();
+        
+        // get artisan by id
         Artisan artisan = artisanService.findById(devisRequestDTO.artisanId());
 
         Devis devis = new Devis();
 
-        devis.setAmount( devisRequestDTO.amount() );
+        devis.setAmount(devisRequestDTO.amount());
         devis.setDateDevis(devisRequestDTO.dateDevis());
         devis.setStatus(devisRequestDTO.devisStatus());
-        devis.setClient( client );
-        devis.setArtisan( artisan );
-
+        devis.setClient(client);
+        devis.setArtisan(artisan);
 
         if (devis.getDateDevis() == null) {
             devis.setDateDevis(LocalDateTime.now());
         }
-        return new ResponseEntity<>(devisRepository.save(devis),HttpStatus.OK);
+        
+        System.out.println("Saving devis: " + devis);
+        Devis savedDevis = devisRepository.save(devis);
+        System.out.println("Saved devis: " + savedDevis);
+        return new ResponseEntity<>(savedDevis, HttpStatus.OK);
     }
 
     public ResponseEntity<List<Devis>> listDevisByClient(Long clientId) {

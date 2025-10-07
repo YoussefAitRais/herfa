@@ -1,1 +1,122 @@
-<h1>waaaaaaaaaaaahia lciyan </h1>
+<div class="max-w-6xl mx-auto">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">Artisan List</h1>
+
+  <!-- Request Form Modal -->
+  <div *ngIf="showForm && formArtisan" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-700">Request Quote</h2>
+      </div>
+
+      <div class="p-6">
+        <!-- Success Message -->
+        <div *ngIf="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+          {{ successMessage }}
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Artisan Info -->
+        <div class="mb-4">
+          <p class="text-gray-600"><strong>To:</strong> {{ formArtisan.name }}</p>
+          <p class="text-gray-600"><strong>Job:</strong> {{ formArtisan.job }}</p>
+          <p class="text-gray-600"><strong>Location:</strong> {{ formArtisan.location }}</p>
+        </div>
+
+        <!-- Amount Input -->
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
+            Amount (MAD)
+          </label>
+          <input
+            id="amount"
+            type="number"
+            [(ngModel)]="amount"
+            placeholder="Enter amount"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+          />
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex justify-end space-x-3">
+          <button
+            (click)="closeRequestForm()"
+            class="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium rounded"
+          >
+            Cancel
+          </button>
+          <button
+            (click)="sendQuoteRequest()"
+            [disabled]="!amount || amount <= 0"
+            class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Send Request
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Artisan List -->
+  <div class="bg-white shadow rounded-lg overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-200">
+      <h2 class="text-xl font-semibold text-gray-700">Available Artisans</h2>
+    </div>
+
+    <div *ngIf="artisans.length === 0" class="p-6 text-center text-gray-500">
+      No artisans found.
+    </div>
+
+    <div *ngIf="artisans.length > 0" class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Name
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Job
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Location
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Description
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions
+          </th>
+        </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let artisan of artisans">
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm font-medium text-gray-900">{{ artisan.name }}</div>
+            <div class="text-sm text-gray-500">{{ artisan.email }}</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-900">{{ artisan.job }}</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            {{ artisan.location }}
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-500">
+            {{ artisan.description }}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+            <button
+              (click)="openRequestForm(artisan)"
+              class="text-teal-600 hover:text-teal-900 bg-teal-100 hover:bg-teal-200 px-3 py-1 rounded"
+            >
+              Request Quote
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

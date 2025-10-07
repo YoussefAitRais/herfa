@@ -50,7 +50,7 @@ public class ClientController {
 
     @DeleteMapping("/deleteAllClient")
     public ResponseEntity<Void> deleteAllClients() {
-        clientService.getAllClients();
+        clientService.getAllClients().getBody().forEach(client -> clientService.deleteClient(client.getId()));
         return ResponseEntity.noContent().build();
     }
 
@@ -60,8 +60,8 @@ public class ClientController {
     }
 
     @GetMapping("/{id}/devis")
-    public List<Devis> getAllDevisForClient(@PathVariable Long id) {
-        return (List<Devis>) clientService.getAllDevisForClient(id);
+    public ResponseEntity<List<Devis>> getAllDevisForClient(@PathVariable Long id) {
+        return clientService.getAllDevisForClient(id);
     }
 
     @PutMapping("/devis/{id}/status")
