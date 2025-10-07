@@ -1,0 +1,20 @@
+```mermaid
+graph TD
+    A[Client: Sara Benali] -->|Sends Devis Request| B[Artisan: Ahmed Bouazza]
+    B -->|Responds with Accept/Reject| A
+    
+    A -->|Amount: 2500 MAD| C[Devis Request]
+    C -->|Status: PENDING| B
+    C -->|Status Update| D[Dashboard]
+    
+    style A fill:#4F86C6,stroke:#333,color:white
+    style B fill:#8B4513,stroke:#333,color:white
+    style C fill:#FFD700,stroke:#333,color:black
+    style D fill:#32CD32,stroke:#333,color:white
+    
+    linkStyle 0 stroke:#4F86C6,stroke-width:2px;
+    linkStyle 1 stroke:#8B4513,stroke-width:2px;
+    linkStyle 2 stroke:#FFD700,stroke-width:2px;
+    linkStyle 3 stroke:#8B4513,stroke-width:2px;
+    linkStyle 4 stroke:#32CD32,stroke-width:2px;
+```

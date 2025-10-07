@@ -1,0 +1,153 @@
+/* Client Dashboard Styles */
+.max-w-6xl {
+  max-width: 72rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-gray-800 {
+  color: #1f2937;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.border-b {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.border-gray-200 {
+  border-color: #e5e7eb;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.text-gray-700 {
+  color: #374151;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.min-w-full {
+  min-width: 100%;
+}
+
+.divide-y > :not([hidden]) ~ :not([hidden]) {
+  border-top: 1px solid #e5e7eb;
+}
+
+.divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #e5e7eb;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.text-gray-900 {
+  color: #111827;
+}

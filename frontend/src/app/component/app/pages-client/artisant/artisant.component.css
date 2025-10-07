@@ -1,0 +1,94 @@
+/* Artisan component styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #0d9488; /* teal-600 */
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0f766e; /* teal-700 */
+}
+
+.btn-secondary {
+  background-color: #f3f4f6; /* gray-100 */
+  color: #4b5563; /* gray-600 */
+}
+
+.btn-secondary:hover {
+  background-color: #e5e7eb; /* gray-200 */
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db; /* gray-300 */
+  border-radius: 0.25rem;
+}
+
+.form-input:focus {
+  outline: none;
+  ring: 2px solid #0d9488; /* teal-600 */
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 1rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 28rem; /* 448px */
+}
+
+.card-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb; /* gray-200 */
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.alert-success {
+  background-color: #dcfce7; /* green-100 */
+  border: 1px solid #bbf7d0; /* green-200 */
+  color: #166534; /* green-800 */
+}
+
+.alert-error {
+  background-color: #fee2e2; /* red-100 */
+  border: 1px solid #fecaca; /* red-200 */
+  color: #991b1b; /* red-800 */
+}

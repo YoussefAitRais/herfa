@@ -37,12 +37,12 @@ public class ArtisanService {
 
     public Artisan findById(Long id) {
         return artisanRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Client not found"));
+                .orElseThrow(() -> new RuntimeException("Artisan not found"));
     }
 
     public Artisan updateArtisan(Long id, String name, String email, String password, String job , String location, String description) {
         Artisan existingArtisan = artisanRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Client not found"));
+                .orElseThrow(() -> new RuntimeException("Artisan not found"));
         existingArtisan.setName(name);
         existingArtisan.setEmail(email);
         existingArtisan.setPassword(password);
@@ -67,10 +67,9 @@ public class ArtisanService {
         return devisRepository.save(devis);
     }
 
-    public List<Devis> getAllDemandeDevisForArtisan(Long artisanId) {
-        return devisRepository.findAll().stream()
-                .filter(d -> d.getArtisan().getId().equals(artisanId))
-                .toList();
+    public ResponseEntity<List<Devis>> getAllDevisForArtisan(Long artisanId) {
+        List<Devis> devisList = devisRepository.findByArtisan_Id(artisanId);
+        return new ResponseEntity<>(devisList, HttpStatus.OK);
     }
 
     public void deletById(Long id) {

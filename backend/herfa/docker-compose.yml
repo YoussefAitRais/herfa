@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: herfa-db
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: herfa
+      MYSQL_USER: herfa
+      MYSQL_PASSWORD: herfa
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -proot --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  app:
+    container_name: herfa-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SERVER_PORT: 8081
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/herfa?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: herfa
+      SPRING_DATASOURCE_PASSWORD: herfa
+      APP_JWT_SECRET: changeme-dev-secret
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8091:8091"
+    restart: unless-stopped
+
+volumes:
+  db_data:

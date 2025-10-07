@@ -50,13 +50,18 @@ public class ClientController {
 
     @DeleteMapping("/deleteAllClient")
     public ResponseEntity<Void> deleteAllClients() {
-        clientService.getAllClients();
+        clientService.getAllClients().getBody().forEach(client -> clientService.deleteClient(client.getId()));
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{id}/demander-devis")
     public Devis demanderDevis(@PathVariable Long id, @RequestBody Devis devis) {
         return clientService.demanderDevis(id, devis);
+    }
+
+    @GetMapping("/{id}/devis")
+    public ResponseEntity<List<Devis>> getAllDevisForClient(@PathVariable Long id) {
+        return clientService.getAllDevisForClient(id);
     }
 
     @PutMapping("/devis/{id}/status")

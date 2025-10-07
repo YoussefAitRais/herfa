@@ -1,12 +1,18 @@
 package org.event.herfa.service;
 
 
+import org.event.herfa.dto.requestDTO.DevisRequestDTO;
+import org.event.herfa.entity.Artisan;
+import org.event.herfa.entity.Client;
 import org.event.herfa.entity.Devis;
 import org.event.herfa.entity.DevisStatus;
+import org.event.herfa.repository.ArtisanRepository;
+import org.event.herfa.repository.ClientRepository;
 import org.event.herfa.repository.DevisRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,9 +22,17 @@ public class DevisService {
 
 
     private final DevisRepository devisRepository;
+    private final ArtisanService artisanService;
+    private final ClientService clientService;
 
-    public DevisService(DevisRepository devisRepository) {
+    public DevisService(
+            DevisRepository devisRepository,
+            ArtisanService artisanService,
+            ClientService clientService
+    ) {
         this.devisRepository = devisRepository;
+        this.artisanService = artisanService;
+        this.clientService = clientService;
     }
 
 
@@ -62,11 +76,30 @@ public class DevisService {
 
     //Operations spécifiques
 
-    public ResponseEntity<Devis> sendDevis(Devis devis) {
+    public ResponseEntity<Devis> sendDevis(DevisRequestDTO devisRequestDTO) {
+        System.out.println("Sending devis: " + devisRequestDTO.toString());
+        // get client by id
+        Client client = clientService.getClientById(devisRequestDTO.clientId()).getBody();
+        
+        // get artisan by id
+        Artisan artisan = artisanService.findById(devisRequestDTO.artisanId());
+
+        Devis devis = new Devis();
+
+        devis.setAmount(devisRequestDTO.amount());
+        devis.setDateDevis(devisRequestDTO.dateDevis());
+        devis.setStatus(devisRequestDTO.devisStatus());
+        devis.setClient(client);
+        devis.setArtisan(artisan);
+
         if (devis.getDateDevis() == null) {
             devis.setDateDevis(LocalDateTime.now());
         }
-        return new ResponseEntity<>(devisRepository.save(devis),HttpStatus.OK);
+        
+        System.out.println("Saving devis: " + devis);
+        Devis savedDevis = devisRepository.save(devis);
+        System.out.println("Saved devis: " + savedDevis);
+        return new ResponseEntity<>(savedDevis, HttpStatus.OK);
     }
 
     public ResponseEntity<List<Devis>> listDevisByClient(Long clientId) {

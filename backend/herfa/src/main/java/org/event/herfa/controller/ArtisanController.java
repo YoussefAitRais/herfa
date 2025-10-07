@@ -1,6 +1,7 @@
 package org.event.herfa.controller;
 
 import org.event.herfa.entity.Artisan;
+import org.event.herfa.entity.Devis;
 import org.event.herfa.service.ArtisanService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,11 @@ public class ArtisanController {
     public ResponseEntity<Artisan> getArtisanById(@PathVariable Long id) {
         Artisan artisan = artisansService.findById(id);
         return ResponseEntity.ok(artisan);
+    }
+
+    @GetMapping("/{id}/devis")
+    public ResponseEntity<List<Devis>> getAllDevisForArtisan(@PathVariable Long id) {
+        return artisansService.getAllDevisForArtisan(id);
     }
 
     @PutMapping("/{id}")
